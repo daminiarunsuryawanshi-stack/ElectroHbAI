@@ -1,0 +1,726 @@
+/* ==========================================
+        ELECTROHUB AI PREMIUM THEME
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+html,
+body,
+[class*="css"]{
+    font-family:'Poppins',sans-serif;
+}
+
+/* Hide Streamlit */
+
+#MainMenu{
+    visibility:hidden;
+}
+
+header{
+    visibility:hidden;
+}
+
+footer{
+    visibility:hidden;
+}
+
+/* App Background */
+
+.stApp{
+
+    background:linear-gradient(
+        135deg,
+        #FFF7FB 0%,
+        #FFF3F8 25%,
+        #F8F3FF 60%,
+        #EEF8FF 100%
+    );
+
+    color:#334155;
+}
+
+/* Sidebar */
+
+section[data-testid="stSidebar"]{
+
+    background:white;
+
+    border-right:1px solid #eee;
+}
+
+/* Buttons */
+
+.stButton>button{
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        90deg,
+        #FB7185,
+        #C084FC
+    );
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:17px;
+
+    transition:.3s;
+}
+
+.stButton>button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(251,113,133,.35);
+
+}
+
+/* Search */
+
+.stTextInput input{
+
+    height:60px;
+
+    border-radius:18px;
+
+    border:2px solid #FBCFE8;
+
+    font-size:18px;
+
+    background:white;
+}
+
+.stTextInput input:focus{
+
+    border:2px solid #FB7185;
+}
+
+/* ================= HERO ================= */
+
+.hero-title{
+
+    font-size:72px;
+
+    font-weight:800;
+
+    color:#1E293B;
+
+    line-height:1.1;
+}
+
+.hero-gradient{
+
+    background:linear-gradient(
+        90deg,
+        #FB7185,
+        #C084FC,
+        #60A5FA
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+}
+
+.hero-desc{
+
+    margin-top:20px;
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:#64748B;
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.product-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    margin-bottom:30px;
+
+    height:560px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.product-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 40px rgba(251,113,133,.25);
+
+}
+
+/* Product Image */
+
+.product-image{
+
+    width:100%;
+
+    height:240px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#FAFAFA;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.product-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+}
+
+/* Product Title */
+
+.product-title{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#334155;
+
+    height:58px;
+
+    overflow:hidden;
+
+    margin-top:18px;
+}
+
+/* Rating */
+
+.product-rating{
+
+    color:#F59E0B;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-top:10px;
+}
+
+/* Price */
+
+.product-price{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#FB7185;
+
+    margin-top:12px;
+}
+
+.old-price{
+
+    color:#94A3B8;
+
+    text-decoration:line-through;
+
+    font-size:18px;
+
+    margin-left:10px;
+}
+
+/* ==========================================
+            FLASH SALE
+========================================== */
+
+.flash-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    margin-bottom:30px;
+
+    height:500px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.flash-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 40px rgba(251,113,133,.25);
+
+}
+
+.flash-image{
+
+    width:100%;
+
+    height:220px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#FAFAFA;
+
+    border-radius:18px;
+
+    overflow:hidden;
+}
+
+.flash-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+}
+
+.flash-title{
+
+    margin-top:18px;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#334155;
+
+    height:58px;
+
+    overflow:hidden;
+}
+
+.flash-price{
+
+    margin-top:10px;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#FB7185;
+}
+
+.flash-old{
+
+    margin-left:10px;
+
+    color:#94A3B8;
+
+    text-decoration:line-through;
+
+    font-size:18px;
+}
+
+.flash-badge{
+
+    display:inline-block;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    background:#FB7185;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+/* ==========================================
+            CATEGORY
+========================================== */
+
+.category-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.category-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(251,113,133,.25);
+}
+
+.category-icon{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+}
+
+.category-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#334155;
+}
+
+/* ==========================================
+            PREMIUM CARD
+========================================== */
+
+.premium-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    margin-bottom:35px;
+
+    height:560px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.premium-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(251,113,133,.30);
+}
+
+.sale-badge{
+
+    display:inline-block;
+
+    background:#FB7185;
+
+    color:white;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.premium-image{
+
+    width:100%;
+
+    height:240px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:#FAFAFA;
+
+    border-radius:18px;
+}
+
+.premium-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+}
+
+.premium-rating{
+
+    margin-top:15px;
+
+    color:#F59E0B;
+
+    font-weight:700;
+
+    font-size:18px;
+}
+
+.premium-title{
+
+    margin-top:10px;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#334155;
+
+    height:60px;
+
+    overflow:hidden;
+}
+
+.premium-price{
+
+    margin-top:10px;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#FB7185;
+}
+
+.premium-old{
+
+    margin-left:10px;
+
+    color:#94A3B8;
+
+    text-decoration:line-through;
+
+    font-size:18px;
+}
+
+/* ==========================================
+            IMAGE FIX
+========================================== */
+
+.hero-image img{
+    width:100%;
+    max-width:100%;
+    height:auto;
+}
+
+/* ==========================================
+            RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.hero-title{
+
+font-size:42px;
+
+}
+
+.hero-desc{
+
+font-size:18px;
+
+}
+
+}
+
+/* ==========================================
+        FINAL UI POLISH
+========================================== */
+
+/* Smooth animations */
+
+*{
+    transition: all .25s ease;
+}
+
+/* Better scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#F8FAFC;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#FB7185;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#EC4899;
+}
+
+/* Better buttons */
+
+.stButton>button{
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    cursor:pointer;
+}
+
+/* Card Hover */
+
+div[data-testid="stVerticalBlock"]{
+
+    border-radius:20px;
+}
+
+/* Image Animation */
+
+img{
+
+    transition:.35s;
+}
+
+img:hover{
+
+    transform:scale(1.04);
+}
+
+/* Better Headings */
+
+h1,h2,h3{
+
+    color:#1E293B;
+
+    font-weight:700;
+}
+
+/* Divider */
+
+hr{
+
+    border:none;
+
+    height:1px;
+
+    background:#E2E8F0;
+
+    margin:25px 0;
+}
+
+/* Success */
+
+.stSuccess{
+
+    border-radius:15px;
+}
+
+/* Warning */
+
+.stWarning{
+
+    border-radius:15px;
+}
+
+/* Error */
+
+.stError{
+
+    border-radius:15px;
+}
+
+/* ================= NAVBAR ================= */
+
+.stButton > button{
+
+    height:48px;
+    border-radius:30px;
+    border:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.stButton > button:hover{
+
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(168,85,247,.35);
+}
+
+/* Logo */
+
+.logo{
+
+    font-size:42px;
+    font-weight:800;
+    background:linear-gradient(90deg,#FB7185,#A855F7,#60A5FA);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Hero */
+
+.hero-section{
+
+    padding-top:20px;
+    padding-bottom:40px;
+
+}
+
+img{
+
+    border-radius:25px;
+
+}

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+venv/
+.venv/
+
+# Dataset
+backend/app/ml/dataset/DatafinitiElectronicsProductsPricingData.csv
+
+# ML Models (optional)
+*.pkl
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
