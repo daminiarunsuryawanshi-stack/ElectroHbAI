@@ -22,3 +22,5 @@ Pillow
 plotly
 
 alembic
+
+reportlab
