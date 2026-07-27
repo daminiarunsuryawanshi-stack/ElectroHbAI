@@ -8,6 +8,7 @@ from pages.cart import cart_page
 from pages.checkout import checkout_page
 from pages.orders import orders_page
 from pages.payment import payment_page
+from pathlib import Path
 
 # ================= PAGE CONFIG =================
 
@@ -20,11 +21,11 @@ st.set_page_config(
 
 # ================= LOAD CSS =================
 
-with open("styles/style.css", encoding="utf-8") as f:
-    st.markdown(
-        f"<style>{f.read()}</style>",
-        unsafe_allow_html=True
-    )
+
+css_file = Path(__file__).parent / "styles" / "style.css"
+
+with open(css_file, encoding="utf-8") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 # ================= NAVBAR =================
