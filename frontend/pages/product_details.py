@@ -273,53 +273,88 @@ def product_details_page(product_id=None):
     recommended = get_recommendations(product["id"])
 
     if not recommended:
-
         st.info("No recommendations available.")
-
     else:
+        unique_ids = set()
+        filtered = []
 
-       for i in range(0, len(recommended), 4):
+        for item in recommended:
+            item_id = item.get("id")
+            if item_id and item_id != product["id"] and item_id not in unique_ids:
+                unique_ids.add(item_id)
+                filtered.append(item)
 
-        cols = st.columns(4)
+        if not filtered:
+            st.info("No new recommendations available.")
+        else:
+            for i in range(0, len(filtered), 4):
+                cols = st.columns(4)
 
-        for col, item in zip(cols, recommended[i:i+4]):
+                for col, item in zip(cols, filtered[i:i+4]):
+                    with col:
+                        with st.container():
+                            st.markdown(
+                                """
+                                <div style="border:1px solid #E2E8F0; border-radius:16px; padding:12px; margin-bottom:12px; background:#ffffff;">
+                                """,
+                                unsafe_allow_html=True,
+                            )
 
-            with col:
+                            image = item.get("image", "")
 
-                image = item.get("image", "")
+                            if image and image.startswith(("http://", "https://")):
+                                st.image(image, width=180)
+                            else:
+                                st.image(
+                                    "https://via.placeholder.com/180x180?text=No+Image",
+                                    width=180
+                                )
 
-                if image and image.startswith(("http://", "https://")):
+                            st.markdown(f"**{item.get('name', 'Unknown Product')[:40]}**")
+                            st.write(f"₹{item.get('price', 0)}")
+                            st.write(f"⭐ {item.get('rating', 0)}")
 
-                    st.image(
-                        image,
-                        width=180
-                    )
+                            if st.button(
+                                "View",
+                                key=f"rec_view_{item['id']}"
+                            ):
+                                st.session_state["selected_product"] = item["id"]
+                                st.session_state["page"] = "product_details"
+                                st.rerun()
 
-                else:
+                            c1, c2 = st.columns([1, 1])
 
-                    st.image(
-                        "https://via.placeholder.com/180x180?text=No+Image",
-                        width=180
-                    )
+                            with c1:
+                                if st.button(
+                                    "❤️ Wishlist",
+                                    key=f"rec_wish_{item['id']}"
+                                ):
+                                    result = add_to_wishlist(item["id"])
+                                    if isinstance(result, dict) and result.get("message"):
+                                        st.success(result["message"])
+                                    elif isinstance(result, dict) and result.get("detail"):
+                                        st.error(result["detail"])
+                                    elif isinstance(result, dict) and result.get("error"):
+                                        st.error(result["error"])
+                                    else:
+                                        st.error("Unable to add to wishlist.")
 
+                            with c2:
+                                if st.button(
+                                    "🛒 Add to Cart",
+                                    key=f"rec_cart_{item['id']}"
+                                ):
+                                    result = add_to_cart(item["id"], 1)
+                                    if isinstance(result, dict) and result.get("message"):
+                                        st.success(result["message"])
+                                    elif isinstance(result, dict) and result.get("detail"):
+                                        st.error(result["detail"])
+                                    elif isinstance(result, dict) and result.get("error"):
+                                        st.error(result["error"])
+                                    else:
+                                        st.error("Unable to add product to cart.")
 
-                st.write(
-                    item.get("name", "Unknown Product")[:40]
-                )
-
-                st.write(
-                    f"₹{item.get('price',0)}"
-                )
-
-
-                if st.button(
-                    "View",
-                    key=f"rec_{item['id']}"
-                ):
-
-                    st.session_state["selected_product"] = item["id"]
-
-                    st.rerun() 
+                            st.markdown("</div>", unsafe_allow_html=True)
 
     if __name__ == "__main__":
 

@@ -34,7 +34,7 @@ from app.api.upload import router as upload_router
 from app.api.dashboard import router as dashboard_router
 from app.api.assistant import router as assistant_router
 from app.api import categories
-from app.api import assistant
+
 
 # Create FastAPI App
 app = FastAPI(
@@ -79,4 +79,3 @@ app.include_router(upload_router)
 app.include_router(dashboard_router)
 app.include_router(assistant_router)
 app.include_router(categories.router)
-app.include_router(assistant.router)

@@ -21,7 +21,7 @@ def get_products():
 
         response = requests.get(
             url,
-            timeout=10
+            timeout=30
         )
 
         print("STATUS:", response.status_code)
@@ -59,7 +59,7 @@ def get_products(search=None, category=None):
         response = requests.get(
             f"{BASE_URL}/products/",
             params=params,
-            timeout=10
+            timeout=30
         )
 
         if response.status_code == 200:
@@ -99,7 +99,8 @@ def get_wishlist():
 
         response = requests.get(
             f"{BASE_URL}/wishlist/",
-            headers=get_headers()
+            headers=get_headers(),
+            timeout=30
         )
 
         if response.status_code == 200:
@@ -116,6 +117,10 @@ def get_wishlist():
 
 def add_to_wishlist(product_id):
 
+    headers = get_headers()
+    if not headers:
+        return {"detail": "Please login to add items to your wishlist."}
+
     try:
 
         response = requests.post(
@@ -123,7 +128,7 @@ def add_to_wishlist(product_id):
             json={
                 "product_id": product_id
             },
-            headers=get_headers()
+            headers=headers
         )
 
         return response.json()
@@ -167,7 +172,8 @@ def get_cart():
 
         response = requests.get(
             f"{BASE_URL}/cart/",
-            headers=get_headers()
+            headers=get_headers(),
+            timeout=30
         )
 
         if response.status_code == 200:
@@ -184,9 +190,11 @@ def get_cart():
 
 def add_to_cart(product_id, quantity=1):
 
-    try:
+    headers = get_headers()
+    if not headers:
+        return {"detail": "Please login to add items to your cart."}
 
-        headers = get_headers()
+    try:
 
         print("HEADERS:", headers)
 
@@ -196,7 +204,8 @@ def add_to_cart(product_id, quantity=1):
                 "product_id": product_id,
                 "quantity": quantity
             },
-            headers=headers
+            headers=headers,
+            timeout=30
         )
 
         print("STATUS:", response.status_code)
@@ -368,8 +377,11 @@ def get_recommendations(product_id):
 
     try:
 
+        url = f"{BASE_URL}/recommendation/{product_id}"
+        print("REQUESTING RECOMMENDATIONS URL:", url)
         response = requests.get(
-            f"{BASE_URL}/recommendation/{product_id}"
+            url,
+            timeout=30
         )
 
         if response.status_code == 200:

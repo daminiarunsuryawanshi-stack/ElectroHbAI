@@ -2,13 +2,27 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
 from app.models.product import Product
+from app.ml.recommendation import RecommendationEngine
 
 
 class RecommendationService:
 
     @staticmethod
-    def get_recommendations(db: Session, product_id: int):
+    def get_recommendations(db: Session, product_id: int, top_n: int = 8):
 
+        # Try ML-based recommendations first
+        try:
+            engine = RecommendationEngine(db)
+            ml_recommendations = engine.recommend(product_id, top_n=8)
+            
+            if ml_recommendations:
+                return ml_recommendations
+        except Exception as e:
+            print(f"ML recommendation failed: {e}")
+            # Fall back to database query
+            pass
+
+        # Fallback: Use database query (category/brand/price)
         current = (
             db.query(Product)
             .filter(Product.id == product_id)
@@ -37,5 +51,16 @@ class RecommendationService:
             )
             .all()
         )
+
+        # If no recommendations found from ML or DB heuristics, return top-rated products
+        # excluding the current product so the UI shows something useful.
+        if not recommendations:
+            recommendations = (
+                db.query(Product)
+                .filter(Product.id != current.id)
+                .order_by(Product.rating.desc(), Product.price.asc())
+                .limit(top_n)
+                .all()
+            )
 
         return recommendations

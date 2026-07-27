@@ -12,7 +12,7 @@ from fastapi import Form
 import shutil
 import os
 from typing import Optional
-from typing import Optional
+
 from app.schemas.product import (
     ProductCreate,
     ProductResponse
@@ -100,10 +100,24 @@ def get_products(
         )
 
 
-    products = query.limit(limit).all()
+    products = query.all()
 
+    seen = set()
+    final_products = []
 
-    return products
+    for product in products:
+
+        key = (
+            product.name,
+            product.image
+        )
+
+        if key not in seen:
+            seen.add(key)
+            final_products.append(product)
+
+    return final_products[:limit]
+
 
 @router.put(
     "/{product_id}"

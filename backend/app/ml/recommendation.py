@@ -1,9 +1,13 @@
 import joblib
 import pandas as pd
+import os
 
 from sqlalchemy.orm import Session
 
 from app.models.product import Product
+
+# Get the directory where this script is located
+ML_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class RecommendationEngine:
@@ -12,10 +16,10 @@ class RecommendationEngine:
 
         self.db = db
 
-        self.df = pd.read_pickle("app/ml/products.pkl")
+        self.df = pd.read_pickle(os.path.join(ML_DIR, "products.pkl"))
 
         self.similarity = joblib.load(
-            "app/ml/similarity.pkl"
+            os.path.join(ML_DIR, "similarity.pkl")
         )
 
     def recommend(

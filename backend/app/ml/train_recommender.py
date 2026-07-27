@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import os
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -10,6 +11,9 @@ from app.core.database import SessionLocal
 from app.models.brand import Brand
 from app.models.category import Category
 from app.models.product import Product
+
+# Get the directory where this script is located
+ML_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 db: Session = SessionLocal()
@@ -22,8 +26,7 @@ for p in products:
 
     text = f"""
     {p.name}
-    {p.manufacturer}
-    {p.description}
+    {p.description if p.description else ''}
     """
 
     rows.append({
@@ -52,16 +55,16 @@ similarity = cosine_similarity(
 
 joblib.dump(
     vectorizer,
-    "app/ml/vectorizer.pkl"
+    os.path.join(ML_DIR, "vectorizer.pkl")
 )
 
 joblib.dump(
     similarity,
-    "app/ml/similarity.pkl"
+    os.path.join(ML_DIR, "similarity.pkl")
 )
 
 df.to_pickle(
-    "app/ml/products.pkl"
+    os.path.join(ML_DIR, "products.pkl")
 )
 
 db.close()

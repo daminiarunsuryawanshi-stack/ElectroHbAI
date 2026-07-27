@@ -30,11 +30,11 @@ def wishlist_page():
 
         with col2:
 
-            st.subheader(product["name"])
+            st.subheader(product.get("name", "Product"))
 
             st.write(f"⭐ {product.get('rating', 4.8)}")
 
-            st.markdown(f"### ₹{product['price']}")
+            st.markdown(f"### ₹{product.get('price', 0)}")
 
             c1, c2, c3 = st.columns(3)
 
@@ -44,8 +44,7 @@ def wishlist_page():
                     "🔍 Details",
                     key=f"details_{product['id']}"
                 ):
-
-                    st.session_state["selected_product"] = product["id"]
+                    st.session_state["selected_product"] = product["product_id"]
                     st.session_state["page"] = "product_details"
                     st.rerun()
 
@@ -56,12 +55,7 @@ def wishlist_page():
                     key=f"cart_{product['id']}"
                 ):
 
-                    add_to_cart(product["id"], 1)
-
-                    remove_from_wishlist(product["id"])
-
-                    st.success("Moved to Cart")
-
+                    add_to_cart(product["product_id"], 1)
                     st.rerun()
 
             with c3:

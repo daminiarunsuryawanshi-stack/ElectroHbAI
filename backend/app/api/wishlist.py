@@ -67,9 +67,27 @@ def get_wishlist(
     current_user: User = Depends(get_current_user)
 ):
 
-    return db.query(Wishlist).filter(
-        Wishlist.user_id == current_user.id
-    ).all()
+    wishlist_items = (
+        db.query(Wishlist, Product)
+        .join(Product, Wishlist.product_id == Product.id)
+        .filter(Wishlist.user_id == current_user.id)
+        .all()
+    )
+
+    result = []
+
+    for wishlist_item, product in wishlist_items:
+        result.append({
+            "id": wishlist_item.id,
+            "user_id": wishlist_item.user_id,
+            "product_id": product.id,
+            "name": product.name,
+            "image": product.image,
+            "price": product.price,
+            "rating": product.rating,
+        })
+
+    return result
 
 
 @router.delete("/{wishlist_id}")
