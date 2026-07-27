@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 
-API_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://electrohbai-1.onrender.com"
 BASE_URL = API_URL
 
 
