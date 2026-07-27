@@ -3,7 +3,7 @@ import streamlit as st
 
 
 BASE_URL = "https://electrohbai-1.onrender.com"
-BASE_URL = API_URL
+BASE_URL = "https://electrohbai-1.onrender.com"
 
 
 # ==========================
