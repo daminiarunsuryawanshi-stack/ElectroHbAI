@@ -83,7 +83,6 @@ def show_hero():
         st.image(
             str(image_path),
             width="stretch"
-)
-)
+        )
 
     st.write("")
