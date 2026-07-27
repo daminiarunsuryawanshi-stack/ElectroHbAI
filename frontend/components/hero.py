@@ -1,5 +1,5 @@
 import streamlit as st
-
+from pathlib import Path
 
 def show_hero():
 
@@ -76,9 +76,14 @@ def show_hero():
 
     with right:
 
+        
+
+        image_path = Path(__file__).parent.parent / "assets" / "hero_banner.png"
+
         st.image(
-        "assets/hero_banner.png",
-        width="stretch"
+            str(image_path),
+            width="stretch"
+)
 )
 
     st.write("")
