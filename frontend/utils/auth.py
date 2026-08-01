@@ -11,4 +11,8 @@ def login(email, password):
 
     response = requests.post(url, data=data)
 
+    print("URL:", url)
+    print("Status:", response.status_code)
+    print("Response:", response.text)
+
     return response
