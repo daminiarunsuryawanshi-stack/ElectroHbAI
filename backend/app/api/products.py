@@ -17,6 +17,7 @@ from app.schemas.product import (
     ProductCreate,
     ProductResponse
 )
+from app.ml.recommendation import RecommendationEngine
 
 router = APIRouter(
     prefix="/products",
@@ -118,6 +119,38 @@ def get_products(
 
     return final_products[:limit]
 
+@router.get(
+    "/recommend/{product_id}",
+    response_model=list[ProductResponse]
+)
+def recommend_products(
+    product_id: int,
+    db: Session = Depends(get_db)
+):
+    """
+    Return AI recommended products similar to the selected product.
+    """
+
+    product = (
+        db.query(Product)
+        .filter(Product.id == product_id)
+        .first()
+    )
+
+    if not product:
+        raise HTTPException(
+            status_code=404,
+            detail="Product not found"
+        )
+
+    recommender = RecommendationEngine(db)
+
+    recommendations = recommender.recommend(
+        product_id=product_id,
+        top_n=8
+    )
+
+    return recommendations
 
 @router.put(
     "/{product_id}"

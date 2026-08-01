@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
@@ -47,9 +48,17 @@ app = FastAPI(
 Base.metadata.create_all(bind=engine)
 
 # Static Files
+# Build an absolute path to "uploads" relative to this file (backend/app/main.py -> backend/uploads)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_DIR = os.path.join(BASE_DIR, "..", "uploads")
+UPLOAD_DIR = os.path.abspath(UPLOAD_DIR)
+
+# Auto-create the folder if it doesn't exist yet
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 app.mount(
     "/uploads",
-    StaticFiles(directory="uploads"),
+    StaticFiles(directory=UPLOAD_DIR),
     name="uploads"
 )
 
